@@ -1,92 +1,54 @@
 # miel-abeilles
 
-## 📖 Partie Théorique du Projet Le Miel et les Abeilles
+#  Partie Théorique – Le Miel et les Abeilles
 
-### 1. Contexte & Métaphore
+##  Contexte et Métaphore
+Une colonie de 101 abeilles s’installe dans un pommier au milieu d’un champ de fleurs mellifères.  
+Leur objectif : butiner toutes les fleurs le plus efficacement possible pour nourrir la reine Maya et ses larves.  
 
-Une colonie d’abeilles explore un champ de fleurs.  
-Chaque abeille représente une solution possible (un chemin pour butiner toutes les fleurs).  
-La reine, soucieuse d’efficacité, applique une sélection naturelle numérique :
+Mais la reine est exigeante : elle veut que sa colonie s’améliore de génération en génération.  
+Seules les abeilles les plus rapides, celles qui trouvent les chemins les plus courts, ont le droit de se reproduire.  
+Les plus lentes sont remplacées.  
 
-- Les meilleures abeilles (celles qui trouvent le chemin le plus court/rapide) transmettent leur savoir.
-- Les moins performantes disparaissent.
-- Au fil des générations, la colonie apprend à optimiser ses trajets.
-
-👉 **C’est exactement le principe d’un Algorithme Génétique (AG).**
+Ce comportement illustre le **principe de sélection naturelle numérique**, au cœur des **algorithmes génétiques**.  
 
 ---
 
-### 2. 🧬 Qu’est-ce qu’un Algorithme Génétique ?
+##   Le Problème Caché – Le Voyageur de Commerce (TSP)
+Le défi des abeilles correspond à un problème bien connu en informatique : le **problème du voyageur de commerce** (*Traveling Salesperson Problem, TSP*).  
 
-Un algorithme génétique est une méthode d’optimisation inspirée de la biologie évolutive.  
-Il imite le processus de sélection naturelle (Darwin) :
+- **Définition** : une abeille part de la ruche, doit visiter chaque fleur **une seule fois**, puis revenir à la ruche.  
+- **Nature du problème** : optimisation combinatoire.  
+- **Explosion combinatoire** :  
+  - Avec 10 fleurs → 181 440 chemins possibles.  
+  - Avec 20 fleurs → 1,2 × 10¹⁷ chemins.  
+  - Tester toutes les solutions est impossible, même avec les ordinateurs les plus rapides.  
 
-- **Population initiale** : plusieurs solutions candidates (chemins d’abeilles).
-- **Évaluation (fitness)** : on mesure la performance de chaque individu (distance/temps parcouru).
-- **Sélection** : les meilleurs sont choisis comme parents.
-- **Reproduction (crossover)** : croisement des chemins pour créer de nouveaux individus.
-- **Mutation** : petites variations aléatoires pour maintenir de la diversité.
-- **Nouvelle génération** : on répète le cycle jusqu’à convergence.
-
-👉 **Résultat : la population s’améliore génération après génération.**
+  Plutôt que de chercher **le chemin parfait** (souvent hors de portée), on cherche **un chemin excellent**, obtenu rapidement grâce à des méthodes heuristiques.  
 
 ---
 
-### 3. ⚙️ Les Paramètres Clés à Étudier
+## La Solution – Les Algorithmes Génétiques
+Les algorithmes génétiques (AG) s’inspirent de la théorie de l’évolution de Darwin.  
+L’idée est de simuler une population d’individus qui s’améliorent au fil du temps par **sélection, croisement et mutation**.  
 
-Tu dois tester et comparer différents réglages :
+### Dictionnaire Abeille ⇔ Algorithme Génétiques
+- **Individu (abeille)** = un chemin possible (chromosome).  
+- **Population** = l’ensemble des 100 abeilles de la colonie.  
+- **Gène** = une fleur dans le chemin.  
+- **Fitness (score de qualité)** = l’efficacité d’une abeille :  
 
-- **Taille de la population** (ex. 50, 100, 200 abeilles).
-- **Taux de reproduction** (ex. 40%, 60%, 80%).
-- **Méthode de sélection** (roulette, tournoi).
-- **Taux de mutation** (fixe ou adaptatif).
-- **Nombre de générations** (ex. 100, 200, 500).
-- **Fonction de fitness** (distance totale, temps moyen, énergie dépensée).
+  \[
+  \text{Fitness} = \frac{1}{\text{distance totale}}
+  \]
 
-👉 **L’objectif est de justifier pourquoi tel paramétrage est le plus efficace.**
-
----
-
-### 4. 📊 Visualisations Attendues
-
-Le sujet impose 3 représentations :
-
-- **Chemin optimal** : un graphe avec les fleurs reliées dans l’ordre du parcours de la meilleure abeille.
-- **Évolution des performances** : une courbe montrant la fitness moyenne/minimale par génération.
-- **Arbre généalogique** : montrer les ancêtres de la meilleure abeille finale.
-
-👉 **Ces visualisations rendent l’AG compréhensible pour un non-spécialiste.**
+- **Sélection** = seules les meilleures abeilles se reproduisent.  
+- **Croisement (crossover)** = mélange des chemins de deux parents pour créer un nouvel enfant.  
+- **Mutation** = petite variation aléatoire (ex. inversion de deux fleurs).  
+- **Génération** = un cycle complet : évaluation → sélection → reproduction → mutation → remplacement.  
 
 ---
 
-### 5. 🔍 Compétences visées
-
-- **Algorithmique** : comprendre et coder un AG.
-- **Traitement de données** : structurer et exploiter des données (coordonnées des fleurs).
-- **Analyse** : comparer des résultats selon plusieurs paramètres.
-- **Visualisation** : présenter des résultats clairs et accessibles.
-- **Communication** : vulgariser la sélection naturelle numérique.
-
----
-
-### 6. 📂 Livrables obligatoires
-
-Repository GitHub public `miel-abeilles` avec :
-
-- `beehive.py` → classes & logique (POO).
-- `main.py` → simulation de l’évolution.
-- `README.md` → problématique, explications, résultats, conclusion.
-- Présentation (slides) → explication + résultats + veille (autres heuristiques comme ACO, PSO, recuit simulé).
-
----
-
-Un fichier `Readme.md` expliquant la problématique, les solutions apportées et une conclusion de votre travail.
-
----
-
-### connaissances
-
-- Darwin and Natural Selection: Crash Course History of Science #22.
-- Bibliotech : Les quatre forces évolutives.
-- Algorithme Génétique : Wiki algorithmes génétiques.
-- Université de Gustave Eiffel : Fonctionnement Algorithme génétique.
+##  Cycle de Vie d’une Génération
+```ascii
+Initialisation → Évaluation → Sélection → Croisement/Mutation → Remplacement → Nouvelle Génération
