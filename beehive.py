@@ -1,7 +1,12 @@
 from dataclasses import dataclass
 import csv
 import random
-from typing import List
+from math import hypot
+from typing import List, Tuple
+from config import RUCHE_POS
+
+
+# ---------- Entités ----------
 
 @dataclass(frozen=True)
 class Fleur:
@@ -12,6 +17,25 @@ class Fleur:
     def position(self) -> tuple[float, float]:
         return (self.x, self.y)
 
+
+@dataclass(frozen=True)
+class Ruche:
+    """Ruche immuable avec position par défaut (500, 500)."""
+    x: float = RUCHE_POS[0]
+    y: float = RUCHE_POS[1]
+
+    def position(self) -> tuple[float, float]:
+        return (self.x, self.y)
+
+
+# ---------- Utilitaires communs ----------
+
+def distance_xy(a: Tuple[float, float], b: Tuple[float, float]) -> float:
+    """Distance euclidienne entre deux points (x, y)."""
+    return hypot(a[0] - b[0], a[1] - b[1])
+
+
+# ---------- Fleurs: génération / IO CSV ----------
 
 def generate_fleurs(n: int, max_coord: int) -> List[Fleur]:
     """Génère n fleurs aléatoires dans un carré [0, max_coord]."""

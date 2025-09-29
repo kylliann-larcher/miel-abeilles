@@ -11,3 +11,6 @@ FLEURS_CSV = DATA_DIR / "fleurs.csv"
 # Paramètres par défaut
 DEFAULT_N_FLEURS = 20
 MAX_COORD = 1000
+
+# Position de la ruche (source unique)
+RUCHE_POS = (500.0, 500.0)
