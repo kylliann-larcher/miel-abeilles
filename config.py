@@ -23,25 +23,9 @@ RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 # --- Presets de benchmark ---
 PRESETS = {
-    "petit": {
-        "generations": 40,
-        "pop_size": 40,
-        "p_mut": 0.08,
-        "elite_n": 2,
-        "tournoi_k": 3,
-    },
-    "moyen": {
-        "generations": 80,
-        "pop_size": 80,
-        "p_mut": 0.06,
-        "elite_n": 2,
-        "tournoi_k": 3,
-    },
-    "tres_precis": {
-        "generations": 150,
-        "pop_size": 150,
-        "p_mut": 0.04,
-        "elite_n": 2,
-        "tournoi_k": 3,
-    },
+    "petit":       {"generations": 60,  "pop_size": 50,  "p_mut": 0.12, "elite_n": 1, "tournoi_k": 2},
+    "moyen":       {"generations": 200, "pop_size": 100, "p_mut": 0.08, "elite_n": 2, "tournoi_k": 3},
+    "tres_precis": {"generations": 500, "pop_size": 200, "p_mut": 0.05, "elite_n": 3, "tournoi_k": 4},
 }
+
+

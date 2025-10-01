@@ -1,0 +1,4 @@
+preset,generations,pop_size,p_mut,elite_n,tournoi_k,final_best_distance,gap_vs_ref_pct,runtime_seconds
+petit,60,50,0.12,1,2,3594.708499,35.84,0.0631
+moyen,200,100,0.08,2,3,2748.681006,3.87,0.4172
+tres_precis,500,200,0.05,3,4,2660.362276,0.54,2.1589

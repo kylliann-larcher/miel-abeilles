@@ -252,3 +252,59 @@ def evolve(fleurs: List[Fleur], generations=50, pop_size=POP_SIZE,
         "fleurs_idx": fleurs_idx,
         "ruche": ruche,
     }
+
+# --- Chemins de référence & comparaison ---
+
+def nearest_neighbor_path(fleurs_idx: Dict[int, Fleur], ruche: Ruche) -> Tuple[List[int], float]:
+    """Construit un chemin glouton (plus proche voisin) et renvoie (chemin, distance)."""
+    import math
+
+    remaining = set(fleurs_idx.keys())
+    chemin: List[int] = []
+    cur = ruche.position()
+
+    while remaining:
+        # trouve la fleur la plus proche du point courant
+        best_id = None
+        best_d = math.inf
+        for fid in remaining:
+            d = distance_xy(cur, fleurs_idx[fid].position())
+            if d < best_d:
+                best_d = d
+                best_id = fid
+        chemin.append(best_id)
+        cur = fleurs_idx[best_id].position()
+        remaining.remove(best_id)
+
+    # calcule la distance totale ruche -> fleurs -> ruche
+    d_total = chemin_distance(chemin, fleurs_idx, ruche)
+    return chemin, d_total
+
+
+def brute_force_optimal_distance(fleurs_idx: Dict[int, Fleur], ruche: Ruche, limit_n: int = 10) -> Tuple[Optional[List[int]], Optional[float]]:
+    """
+    Si le nombre de fleurs <= limit_n, calcule l'optimal exact par brute-force (permutations).
+    Sinon renvoie (None, None).
+    """
+    from itertools import permutations
+    ids = list(fleurs_idx.keys())
+    n = len(ids)
+    if n > limit_n:
+        return None, None
+
+    best_path = None
+    best_dist = float("inf")
+
+    for perm in permutations(ids):
+        d = chemin_distance(list(perm), fleurs_idx, ruche)
+        if d < best_dist:
+            best_dist = d
+            best_path = list(perm)
+
+    return best_path, best_dist
+
+
+def chemin_distance(chemin: List[int], fleurs_idx: Dict[int, Fleur], ruche: Ruche) -> float:
+    """Distance totale pour un chemin (helper fonctionnel)."""
+    ab = Abeille(chemin=list(chemin))
+    return ab.compute_fitness(fleurs_idx, ruche)
